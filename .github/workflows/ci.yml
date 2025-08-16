@@ -21,6 +21,16 @@ jobs:
         with:
           go-version: '1.21.12'
 
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
       - name: Build
         run: go build -o go-web-app
 
@@ -37,6 +47,16 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.21.12'
+
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
 
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v6
