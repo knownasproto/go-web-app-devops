@@ -1,10 +1,12 @@
-# This is a sample deployment manifest file for a simple web applicatio
+# This is a sample deployment manifest file for a simple web application.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: go-web-app
+  labels:
+    app: go-web-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: go-web-app
@@ -15,7 +17,6 @@ spec:
     spec:
       containers:
       - name: go-web-app
-        image: knownasproto/go-web-app:17007281038
+        image: knownasproto/go-web-app
         ports:
         - containerPort: 8080
-
